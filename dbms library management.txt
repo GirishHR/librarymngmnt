@@ -1,0 +1,98 @@
+CREATE TABLES:
+create table customer1
+(
+cid number(4) primary key,
+rid number(4),
+cname varchar(10),
+address varchar(20),
+phno number(10),
+email_id varchar(15)
+);
+create table rooms1
+(
+rid number(4) primary key,
+room_type varchar(10),
+price_per_night number(5),
+status varchar2(10)
+);
+Alter table customer1 add foreign key rid references rooms1(rid);
+
+create table booking
+(
+bid number(5) primary key,
+cid number(4) references customer1(cid),
+rid number(4) references rooms1(rid),
+checkin date,
+checkout date,
+);
+create table bill
+(
+bill_no varchar(4) primary key,
+cid number(4) references customer(cid),
+status varchar2(10)
+);
+create table employees
+(
+eid number(4) primary key,
+rid number(4) references rooms1(rid),
+fname varchar(10),
+lname varchar(4),
+desgn varchar(10),
+gender char
+);
+INSERT VALUES:
+Customer1:
+insert into customer1
+values(1,101,'karthik','shimoga',7204821911,'k98@gmail.com');
+insert into customer1
+values(2,102,'gaurav','hyderabad',7204822913,'ga98@gmail.com');
+insert into customer1
+values(3,103,'krishna','bangalore',7204822912,'kr98@gmail.com');
+insert into customer1
+values(4,104,'kedare','mangalore',7204822912,'kl98@gmail.com');
+insert into customer1
+values(5,105,'girish','mysore',7204822918,'gr98@gmail.com');
+Rooms1:
+insert into rooms1 values(101,'NON AC-SB',500,'occupied');
+insert into rooms1 values(102,'NON AC-DB',600,'occupied');
+insert into rooms1 values(103,'AC-SB',800,'occupied');
+insert into rooms1 values(104,'NON AC-SB',600,'occupied');
+insert into rooms1 values(105,'NON AC-DB',600,'occupied');
+insert into rooms1 values(106,'AC-SB',800,'unoccupied');
+insert into rooms1 values(107,'AC-DB',1200,'unoccupied');
+insert into rooms1 values(108,'AC-DB',1200,'unoccupied');
+Booking:
+insert into booking (bid,cid,rid,checkin,checkout)
+values(1001,1,101,TO_DATE('2017/05/03 21:02:44', 'yyyy/mm/dd
+hh24:mi:ss'),TO_DATE('2017/05/07 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+insert into booking (bid,cid,rid,checkin,checkout)
+values(1002,2,102,TO_DATE('2017/08/20 21:02:44', 'yyyy/mm/dd
+hh24:mi:ss'),TO_DATE('2017/08/22 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+insert into booking (bid,cid,rid,checkin,checkout)
+values(1003,3,103,TO_DATE('2017/09/06 21:02:44', 'yyyy/mm/dd
+hh24:mi:ss'),TO_DATE('2017/09/09 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+insert into booking (bid,cid,rid,checkin,checkout)
+values(1004,4,104,TO_DATE('2017/08/30 21:02:44', 'yyyy/mm/dd
+hh24:mi:ss'),TO_DATE('2017/09/01 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+insert into booking (bid,cid,rid,checkin,checkout)
+values(1005,5,105,TO_DATE('2017/08/30 21:02:44', 'yyyy/mm/dd
+hh24:mi:ss'),TO_DATE('2017/09/01 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
+Bill:
+insert into bill values(1011,1,'N-Paid');
+insert into bill values(1012,2,'Paid');
+insert into bill values(1013,3,'N-Paid');
+insert into bill values(1014,4,'Paid');
+insert into bill values(1015,5,'N-Paid');
+Employees:
+insert into employees values(5001,101,'puttamma','h','servant','F');
+insert into employees (eid,fname,lname,desgn,gender)
+values(5002,'shivappa','b','manager','M');
+insert into employees values(5003,102,'kenchappa','J','cleaner','M');
+insert into employees values(5004,103,'siddiah','M','servant','M');
+insert into employees values(5005,103,'ramanna','','roomserv','M');
+insert into employees values(5006,104,'nandish','BM','servant','M');
+insert into employees(eid,fname,lname,desgn,gender)
+values(5007,'Balaji','h','reception','M');
+insert into employees values(5008,106,'Gokul','G','servant','M');
+insert into employees values(5009,107,'anil','A','servant','M');
+insert into employees values(5010,108,'dhanush','D','servant','M');
